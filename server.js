@@ -1,6 +1,13 @@
 const express = require('express');
-
 const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+
+//multer shiz
+var multer = require("multer");
+var fs = require("fs");
+var storage = multer.memoryStorage()
+var upload = multer({storage: storage});
 
 app.get('/api/customers', (req, res) => {
   const customers = [
