@@ -10,25 +10,33 @@ class Sidebar extends Component {
   }
 
   handleChange = (event) => {
-    //looks like value is set as a default thing
-    this.setState({value: event.target.value});
+    const data = new FormData();
 
-    console.log(event.target.value);
+    data.append('file', event.target.files);
+
+    axios.post('http://localhost:5000/', data).then((response) => {
+      console.log("Response:", response.data.foob);
+    });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  //this is experimental ATM
+  uploadDocument = (file, name) => {
+    console.log("inside uploadDocument")
+    let data = new FormData();
 
-    console.log("submitted val:", this.state.value);
+    data.append('file', "foob");
+    data.append('name', "arrgh");
 
-    axios.post("http://localhost:5000/", {
-      files: "howdy"
-    })
-      .then(response => console.log(response))
-      .catch(error => console.log("something fcked up", error))
+    console.log("upload data: ", data)
 
-      console.log("fcking test bitches")
+    return (dispatch) => {
+      axios.post('/', data)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    };
   }
+
+
 
   render() {
     return(
@@ -41,7 +49,6 @@ class Sidebar extends Component {
 
           <form onSubmit={this.handleSubmit}>
             <input type="file" name="files" onChange={this.handleChange} multiple/>
-            <input type="submit" value="Submit" />
           </form>
 
         </div>

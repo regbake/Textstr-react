@@ -49,7 +49,9 @@ app.get("/", function(req, res, next){
 });
 
 app.post("/", upload.any("files"), function(req, res, next){
-  console.log("sup form the post roote");
+  console.log("sup form the post roote", req.files);
+
+  res.json({foob: "going postal"})
   // const fileArray = [];
   // const allFiles = req.files; //an array of file Objects if multiple uploaded
   // const files = []; //all the .txtFiles
