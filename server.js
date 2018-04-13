@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //TextFunction module
 const TextFunctions = require('./TextFunctions.js');
 
-//define Object.entries
+//Object.entries polyfill
 if (!Object.entries){
   Object.entries = function( obj ){
     var ownProps = Object.keys( obj ),
