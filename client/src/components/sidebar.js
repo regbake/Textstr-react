@@ -9,6 +9,7 @@ class Sidebar extends Component {
   }
 
   handleChange = (event) => {
+    //looks like value is set as a default thing
     this.setState({value: event.target.value});
 
     console.log(event.target.value);
@@ -16,6 +17,7 @@ class Sidebar extends Component {
 
   handleSubmit = (e) => {
     console.log("submitted val", this.state.value)
+
     e.preventDefault();
   }
 
@@ -29,7 +31,7 @@ class Sidebar extends Component {
         <div className="input-form">
 
           <form onSubmit={this.handleSubmit}>
-            <input type="file" name="files" value={this.state.value} onChange={this.handleChange} />
+            <input type="file" name="files" onChange={this.handleChange} multiple/>
             <input type="submit" value="Submit" />
           </form>
 
