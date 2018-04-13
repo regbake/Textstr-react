@@ -26,6 +26,8 @@ class Sidebar extends Component {
     })
       .then(response => console.log(response))
       .catch(error => console.log("something fcked up", error))
+
+      console.log("fcking test bitches")
   }
 
   render() {
