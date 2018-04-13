@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './sidebar.css';
 
 class Sidebar extends Component {
@@ -16,9 +17,15 @@ class Sidebar extends Component {
   }
 
   handleSubmit = (e) => {
-    console.log("submitted val", this.state.value)
-
     e.preventDefault();
+
+    console.log("submitted val:", this.state.value);
+
+    axios.post("http://localhost:5000/", {
+      files: "howdy"
+    })
+      .then(response => console.log(response))
+      .catch(error => console.log("something fcked up", error))
   }
 
   render() {
@@ -34,11 +41,6 @@ class Sidebar extends Component {
             <input type="file" name="files" onChange={this.handleChange} multiple/>
             <input type="submit" value="Submit" />
           </form>
-
-          // <form encType="multipart/form-data" action="/" method="post">
-          //   <input type="file" name="files" multiple />
-          //   <button type="submit" className="btn btn-success">Submit File</button>
-          // </form>
 
         </div>
       </div>

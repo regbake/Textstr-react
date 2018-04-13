@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+// const cors = require('cors');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 //multer shiz
 var multer = require("multer");
@@ -29,7 +34,13 @@ if (!Object.entries){
   };
 }
 
-app.get("/", function(req, res){
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get("/", function(req, res, next){
   res.render("index", {
     fileArray: [],
     timeData: [],
@@ -37,7 +48,7 @@ app.get("/", function(req, res){
   });
 });
 
-app.post("/", upload.any("files"), function(req, res){
+app.post("/", upload.any("files"), function(req, res, next){
   console.log("sup form the post roote");
   // const fileArray = [];
   // const allFiles = req.files; //an array of file Objects if multiple uploaded
