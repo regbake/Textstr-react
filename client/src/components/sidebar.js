@@ -15,8 +15,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="input-form">
-          
-          <form enctype="multipart/form-data" action="/" method="post">
+          <form encType="multipart/form-data" action="/" method="post">
             <input type="file" name="files" multiple />
             <button type="submit" className="btn btn-success">Submit File</button>
           </form>

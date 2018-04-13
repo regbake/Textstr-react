@@ -10,7 +10,7 @@ class InputOutputWrap extends Component {
 
   render() {
     return(
-      <div idName="input-output-wrap">
+      <div id="input-output-wrap">
         <Sidebar></Sidebar>
       </div>
     )
