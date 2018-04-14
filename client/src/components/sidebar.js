@@ -12,33 +12,50 @@ class Sidebar extends Component {
   handleChange = (event) => {
     const data = new FormData();
     const files = [];
+    const test = new FormData();
 
-    console.log(event.target.files[0])
-    files.push(event.target.files[0])
+    test.append("name", "haha")
 
-    data.append('file', event.target.files[0]);
+    if (event.target.files){
+        console.log("files are present");
+
+        if (event.target.files.length === 1) {
+            //one file
+            data.append("file", event.target.files[0]);
+
+            console.log("only one file");
+        } else {
+            //more than one file
+            console.log("more than one file");
+
+            for (let single of event.target.files) {
+                files.push(single);
+                
+            }
+
+            data.append("file", files)
+            console.log("fileList: ", files)
+        }
+    }
 
 
-    axios.post('http://localhost:5000/', data).then((response) => {
-      console.log("Response:", response.data.foob);
-    });
+    console.log("DATA: ", data)
+
+    axios.post('http://localhost:5000/', data)
+      .then((response) => {
+        // console.log("Response:", response.data.foob);
+        // console.log("fileNameArray:", response.data.fileNameArray);
+        // console.log("timeData:", response.data.timeData);
+        // console.log("cleanArray:", response.data.cleanArray);
+      })
+      .catch((err) =>{
+        console.log("err: ", err)
+      });
   }
 
   //this is experimental ATM
   uploadDocument = (event) => {
-    console.log("inside uploadDocument")
-    let data = new FormData();
 
-    data.append('file', event.target.files[0]);
-    data.append('name', "arrgh");
-
-    console.log("upload data: ", data)
-
-    return (dispatch) => {
-      axios.post('/', data)
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
-    };
   }
 
 

@@ -49,35 +49,42 @@ app.get("/", function(req, res, next){
 });
 
 app.post("/", upload.any("files"), function(req, res, next){
+  //make sure to use REQ.FILES
   console.log("ahoy from the post matey!")
-  console.log("req.body:", req.files);
 
-  res.json({foob: "going postal"})
-  // const fileArray = [];
-  // const allFiles = req.files; //an array of file Objects if multiple uploaded
-  // const files = []; //all the .txtFiles
-  // let sortedFrequencyArray, cleanArray, timeData;
-  //
-  // //select only text files
-  // allFiles.forEach(function(file){
-  //   if (file.mimetype === 'text/plain'){
-  //     files.push(file);
-  //   }
-  // });
-  //
-  // //declare this after cleaning out non-txt files
-  // const fileNameArray = TextFunctions.fileNameArray(files);
-  //
-  // if (files.length > 0){
-  //   sortedFrequencyArray = TextFunctions.fileArrayToFrequencyArray(files); //raw not cleaned
-  //   cleanArray = TextFunctions.cleanArray(sortedFrequencyArray); //filtered and cleaned, still has \'
-  //   timeData = TextFunctions.extractTimeData(files.slice(0, (files.length)/2));
-  //
-  //   console.log(timeData);
-  //   // console.log(cleanArray);
-  //   // console.log(sortedFrequencyArray);
-  // }
-  //
+  console.log("~*~*~*~*~*files: ", req.files)
+  console.log("body: ", req)
+  // console.log("********req: ", req)
+
+  const fileArray = [];
+  const allFiles = req.files; //an array of file Objects if multiple uploaded
+  const files = []; //all the .txtFiles
+  let sortedFrequencyArray, cleanArray, timeData;
+
+  //select only text files
+  allFiles.forEach(function(file){
+    if (file.mimetype === 'text/plain'){
+      files.push(file);
+    }
+  });
+
+  //declare this after cleaning out non-txt files
+  const fileNameArray = TextFunctions.fileNameArray(files);
+
+  if (files.length > 0){
+    sortedFrequencyArray = TextFunctions.fileArrayToFrequencyArray(files); //raw not cleaned
+    cleanArray = TextFunctions.cleanArray(sortedFrequencyArray); //filtered and cleaned, still has \'
+    timeData = TextFunctions.extractTimeData(files.slice(0, (files.length)/2));
+
+    // console.log(timeData);
+  }
+
+  res.json({
+    foob: "going postal",
+    fileArray: fileNameArray,
+    timeData,
+    cleanArray
+  })
   // res.render("index", {
   //   fileArray: fileNameArray,
   //   //commented out for testing
