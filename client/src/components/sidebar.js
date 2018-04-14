@@ -11,8 +11,13 @@ class Sidebar extends Component {
 
   handleChange = (event) => {
     const data = new FormData();
+    const files = [];
 
-    data.append('file', event.target.files);
+    console.log(event.target.files[0])
+    files.push(event.target.files[0])
+
+    data.append('file', event.target.files[0]);
+
 
     axios.post('http://localhost:5000/', data).then((response) => {
       console.log("Response:", response.data.foob);
@@ -20,11 +25,11 @@ class Sidebar extends Component {
   }
 
   //this is experimental ATM
-  uploadDocument = (file, name) => {
+  uploadDocument = (event) => {
     console.log("inside uploadDocument")
     let data = new FormData();
 
-    data.append('file', "foob");
+    data.append('file', event.target.files[0]);
     data.append('name', "arrgh");
 
     console.log("upload data: ", data)

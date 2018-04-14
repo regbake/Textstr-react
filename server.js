@@ -49,7 +49,8 @@ app.get("/", function(req, res, next){
 });
 
 app.post("/", upload.any("files"), function(req, res, next){
-  console.log("sup form the post roote", req.files);
+  console.log("ahoy from the post matey!")
+  console.log("req.body:", req.files);
 
   res.json({foob: "going postal"})
   // const fileArray = [];
